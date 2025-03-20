@@ -36,7 +36,7 @@ def main():
             timestamp = datetime.now().isoformat()
             proxy = get_server_proxy()
             #Adding whole data to the XML
-            response = proxy.add_note(topic, note_title, text, timestamp)
+            response = proxy.AddNote(topic, note_title, text, timestamp)
             print("Response:", response)
         elif choice == "2":
             #Fetch and display all notes under the topic
