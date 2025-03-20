@@ -47,7 +47,7 @@ class ThreadedXMLRPCServer(ThreadingMixIn, SimpleXMLRPCServer):
     pass
 
 class Notebook:
-    def add_note(self, topic, note_title, text, timestamp):
+    def AddNote(self, topic, note_title, text, timestamp):
         try:
             with lock:
             #Retrieve the tree
@@ -69,8 +69,8 @@ class Notebook:
                 writeToFile(tree)
             return f"Note added under topic '{topic}'."
         except Exception as error:
-            print(f"Error in add_note: {e}")
-            raise Fault(1, f"Error in add_note: {e}")
+            print(f"Error in AddNote: {e}")
+            raise Fault(1, f"Error in AddNote: {e}")
             
 
     def GetNotes(self, topic):
@@ -102,7 +102,7 @@ class Notebook:
             raise Fault(1, f"Error in GetNotes: {error}")
             
 
-    def append_wikipedia_note(self, topic, wikipedia_link):
+    def AppendWikipediaNote(self, topic, wikipedia_link):
         try:
             with lock:
                 #Retrieve XML tree and find the topic
@@ -119,8 +119,8 @@ class Notebook:
                 writeToFile(tree)
             print(f"Wikipedia link appended under topic '{topic}': {wikipedia_link}")
         except Exception as error:
-            print(f"Error in append_wikipedia_note: {error}")
-            raise Fault(1, f"Error in append_wikipedia_note: {error}")
+            print(f"Error in AppendWikipediaNote: {error}")
+            raise Fault(1, f"Error in AppendWikipediaNote: {error}")
             
 
     def FetchFromWikipedia(self, topic):
@@ -139,7 +139,7 @@ class Notebook:
             #Find link, append it a as a note and return link to the user
             if len(data) >= 4 and data[3]:
                 wikipedia_link = data[3][0]
-                self.append_wikipedia_note(topic, wikipedia_link)
+                self.AppendWikipediaNote(topic, wikipedia_link)
                 print(f"Fetched Wikipedia link for topic '{topic}': {wikipedia_link}")
                 return {"topic": topic, "wikipedia_link": wikipedia_link}
             else:
