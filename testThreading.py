@@ -12,7 +12,7 @@ def send_request(topic, note_title, note_text):
         server = xmlrpc.client.ServerProxy("http://localhost:3000", allow_none=True)
         timestamp = datetime.now().isoformat()
         #Add note request
-        response = server.add_note(topic, note_title, note_text, timestamp)
+        response = server.AddNote(topic, note_title, note_text, timestamp)
         print(f"[{threading.current_thread().name}] Finished request for {topic}: {response}") #Response from server
     except Exception as error:
         print(f"[{threading.current_thread().name}] Error during request for {topic}: {error}")
